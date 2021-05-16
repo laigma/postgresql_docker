@@ -19,8 +19,8 @@ services:
     image: dpage/pgadmin4:latest
     restart: always
     environment:
-      PGADMIN_DEFAULT_EMAIL: laigma
-      PGADMIN_DEFAULT_PASSWORD: Lvp222244
+      PGADMIN_DEFAULT_EMAIL: laigma@email.me
+      PGADMIN_DEFAULT_PASSWORD: password
       PGADMIN_LISTEN_PORT: 80
     ports:
     - "8080:80"
