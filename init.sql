@@ -2,39 +2,42 @@
 
 -- DROP TABLE public.zpp_necesidades_actual;
 
-CREATE TABLE public.proveedores
+CREATE TABLE public.materiales
 (
-    id bigserial primary key not null,
-    proveedor character varying(500) COLLATE pg_catalog."default",
-    email_proveedor character varying(500) COLLATE pg_catalog."default",
-    supply character varying(500) COLLATE pg_catalog."default",
-    email_supply character varying(500) COLLATE pg_catalog."default",
-    direccion character varying(500) COLLATE pg_catalog."default",
-    id_sap bigint,
-    idioma character varying COLLATE pg_catalog."default"
+   	id bigserial PRIMARY KEY NOT NULL,
+	id_sap text COLLATE pg_catalog."default" UNIQUE,
+	nombre text COLLATE pg_catalog."default",
+    fabricante text COLLATE pg_catalog."default",
+    familia_producto text COLLATE pg_catalog."default",
+    descripcion text COLLATE pg_catalog."default",
+    ubicacion text COLLATE pg_catalog."default",
+    designacion text COLLATE pg_catalog."default",
+    formato text COLLATE pg_catalog."default",
+    pack_unidad text COLLATE pg_catalog."default",
+    qty_pack real,
+    um_sap text COLLATE pg_catalog."default",
+    consigna boolean
 );
 
-CREATE TABLE public.nosap
+CREATE TABLE public.pedidos
 (
-    id bigserial primary key not null,
-    proveedor character varying(200) COLLATE pg_catalog."default",
-    fecha date,
-    pedido character varying(200) COLLATE pg_catalog."default",
-    pospedido character varying(200) COLLATE pg_catalog."default",
-    albaran character varying(200) COLLATE pg_catalog."default",
-    pn character varying(200) COLLATE pg_catalog."default",
-    lote character varying(200) COLLATE pg_catalog."default",
-    cantidad integer,
-    motivo character varying(200) COLLATE pg_catalog."default",
-    observacionesnosap character varying(200) COLLATE pg_catalog."default",
-    ubicacionbaldanosap character varying(200) COLLATE pg_catalog."default",
-    centro character varying(200) COLLATE pg_catalog."default",
-    supply character varying(200) COLLATE pg_catalog."default",
-    status character varying(50) COLLATE pg_catalog."default",
-    comentario text COLLATE pg_catalog."default",
-    ncontrex character varying(200) COLLATE pg_catalog."default"
+    id bigserial PRIMARY KEY NOT NULL,
+    id_material text COLLATE pg_catalog."default" NOT NULL,
+    fecha_peticion text COLLATE pg_catalog."default" NOT NULL,
+    codigo_coste text COLLATE pg_catalog."default" NOT NULL,
+    qty bigint NOT NULL,
+    FOREIGN KEY (id_material) REFERENCES materiales(id_sap) ,
+    UNIQUE (id_material, fecha_peticion, codigo_coste)
 );
 
+CREATE TABLE public.consumos
+(
+	id bigserial PRIMARY KEY NOT NULL,
+	id_pedido bigint,
+	lote text COLLATE pg_catalog."default",
+	taken_qty bigint,
+	FOREIGN KEY (id_pedido) REFERENCES pedidos(id) 	
+);
 
 
 
