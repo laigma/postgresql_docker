@@ -22,5 +22,3 @@ docker volume ls
 
 # eliminar volumen (CUIDADO QUE BORRA LA DB!)
 docker volume prune
-
-
