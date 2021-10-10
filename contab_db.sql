@@ -24,5 +24,5 @@ CREATE TABLE public.gastos
     tipo_pago varchar(20) NOT NULL,
     detalle text,
     observaciones text,
-    verificado boolean NOT NULL,
+    verificado boolean NOT NULL
 );
